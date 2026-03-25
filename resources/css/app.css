@@ -1,0 +1,248 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+
+    --color-accent: #00a98f;
+    --color-accent-content: #00a98f;
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: #00a98f;
+        --color-accent-content: #00a98f;
+        --color-accent-foreground: var(--color-white);
+    }
+}
+
+@utility hero-gradient {
+    background: linear-gradient(135deg, #e0f8f5 0%, #ffffff 100%);
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+/* ==========================================================================
+   INVOICE REPORTING SYSTEM (Custom Styles)
+   ========================================================================== */
+
+/* Container & Global Base */
+.invoice-container {
+    min-height: 100vh;
+    background-color: #030712 !important;
+    /* gray-950 */
+    color: #f3f4f6 !important;
+    /* gray-100 */
+    font-family: inherit;
+}
+
+.invoice-card {
+    border: 1px solid #1f2937 !important;
+    /* gray-800 */
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    background-color: #111827;
+    /* gray-900 */
+}
+
+/* Table Design */
+.invoice-table {
+    width: 100%;
+    font-size: 11px;
+    border-collapse: collapse;
+}
+
+.invoice-table thead tr {
+    background-color: #1f2937 !important;
+    /* gray-800 */
+    color: #9ca3af !important;
+    /* gray-400 */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.invoice-table th {
+    padding: 0.75rem;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.invoice-table tbody tr {
+    background-color: #111827 !important;
+    /* gray-900 */
+    border-bottom: 1px solid #1f2937 !important;
+    /* gray-800 */
+    transition: background-color 0.2s;
+}
+
+.invoice-table tbody tr:hover {
+    background-color: rgba(31, 41, 55, 0.7) !important;
+    /* gray-800/70 */
+}
+
+.invoice-table td {
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+}
+
+/* Text and Monospace Colors */
+.invoice-table .font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-gray-200 {
+    color: #e5e7eb !important;
+}
+
+.text-gray-300 {
+    color: #d1d5db !important;
+}
+
+.text-gray-400 {
+    color: #9ca3af !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+/* Status Badges */
+.badge-base {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.badge-fco {
+    background-color: rgba(30, 58, 138, 0.6) !important;
+    color: #93c5fd !important;
+    border-color: #1d4ed8 !important;
+}
+
+.badge-cre {
+    background-color: rgba(6, 78, 59, 0.6) !important;
+    color: #bbf7d0 !important;
+    border-color: #047857 !important;
+}
+
+.badge-nc {
+    background-color: rgba(120, 53, 15, 0.6) !important;
+    color: #fef08a !important;
+    border-color: #a16207 !important;
+}
+
+/* Standard Buttons */
+.btn-indigo {
+    background-color: #4f46e5 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-indigo:hover {
+    background-color: #6366f1 !important;
+}
+
+.btn-pdf {
+    background-color: #b91c1c !important;
+    /* red-700 */
+    color: white !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.btn-kude {
+    background-color: #1d4ed8 !important;
+    /* blue-700 */
+    color: white !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Form Controls */
+.invoice-control-select,
+.invoice-control-input {
+    background-color: #1f2937 !important;
+    /* gray-800 */
+    border: 1px solid #374151 !important;
+    /* gray-700 */
+    color: #ffffff !important;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+.invoice-control-input:focus {
+    box-shadow: 0 0 0 2px #6366f1;
+}
