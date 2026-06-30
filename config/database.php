@@ -84,6 +84,48 @@ return [
             ]) : [],
         ],
 
+        /*
+        |----------------------------------------------------------------------
+        | Base de datos farmacia — clientes y vendedores
+        |----------------------------------------------------------------------
+        */
+        'farmacia' => [
+            'driver' => 'mysql',
+            'host' => env('DB_FARMACIA_HOST', '127.0.0.1'),
+            'port' => env('DB_FARMACIA_PORT', '3307'),
+            'database' => env('DB_FARMACIA_DATABASE', 'farmacia'),
+            'username' => env('DB_FARMACIA_USERNAME', 'root'),
+            'password' => env('DB_FARMACIA_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'engine' => null,
+        ],
+
+        /*
+        |----------------------------------------------------------------------
+        | Base de datos deposito — productos y categorías (tipos)
+        |----------------------------------------------------------------------
+        */
+        'deposito' => [
+            'driver' => 'mysql',
+            'host' => env('DB_DEPOSITO_HOST', '127.0.0.1'),
+            'port' => env('DB_DEPOSITO_PORT', '3307'),
+            'database' => env('DB_DEPOSITO_DATABASE', 'deposito'),
+            'username' => env('DB_DEPOSITO_USERNAME', 'root'),
+            'password' => env('DB_DEPOSITO_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),

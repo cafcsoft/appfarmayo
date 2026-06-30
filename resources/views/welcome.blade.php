@@ -208,60 +208,52 @@
                 <!-- Main Glass Card -->
                 <div
                     class="glass-card relative z-10 w-full rounded-[2.5rem] p-8 transform transition duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-teal-500/20">
-                    <div class="flex justify-between items-start mb-8">
-                        <div>
-                            <p class="text-sm text-gray-500 font-bold mb-1 uppercase tracking-wider">Receta Semanal</p>
-                            <h3 class="text-2xl font-bold text-gray-900">Complejo Vitamínico</h3>
-                        </div>
-                        <span
-                            class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold tracking-wide shadow-sm flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> ENVÍO
-                        </span>
-                    </div>
-
-                    <div class="flex justify-center mb-10 relative">
+                    <div class="text-center mb-8">
                         <div
-                            class="absolute w-40 h-40 bg-emerald rounded-full opacity-10 blur-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        </div>
-                        <div
-                            class="w-48 h-48 relative z-10 flex items-center justify-center bg-white rounded-full shadow-lg border border-teal-50">
-                            <svg class="w-24 h-24 text-teal-500 drop-shadow-md" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 rounded-2xl mb-6 shadow-sm">
+                            <svg class="w-10 h-10 text-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                                 </path>
                             </svg>
                         </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Revisa tus Facturas</h3>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            Regístrate ahora para acceder a tu historial de compras, descargar tus facturas y realizar
+                            seguimientos detallados.
+                        </p>
                     </div>
 
-                    <div class="space-y-4">
-                        <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
-                            <div
-                                class="bg-linear-to-r from-teal-400 to-emerald-500 h-2.5 rounded-full w-[80%] relative">
-                                <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="font-bold text-gray-800">Llegando hoy</span>
-                            <span class="text-gray-500 font-medium">14:00 - 16:00</span>
-                        </div>
-                    </div>
-
-                    <button
-                        class="mt-8 w-full py-4 rounded-2xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2 group">
-                        Rastrear Pedido
+                    <a href="{{ route('register') }}"
+                        class="w-full py-4 rounded-2xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2 group">
+                        Regístrate gratis
                         <svg class="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
-                    </button>
+                    </a>
                 </div>
 
             </div>
 
         </div>
     </main>
+
+    <!-- Footer with Visit Counter -->
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-6 py-8 border-t border-gray-100 mt-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm font-medium">
+            <p>© {{ date('Y') }} Farmacia y Perfumería Mayo. Todos los derechos reservados.</p>
+            
+            <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-gray-100 shadow-sm">
+                <span class="flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-gray-600">Visitas: <span class="font-bold text-gray-900">{{ number_format($totalVisitas ?? 0) }}</span></span>
+            </div>
+        </div>
+    </footer>
 
     <!-- WhatsApp Floating Action Button (FAB) -->
     <a href="https://wa.me/595994310145" target="_blank"

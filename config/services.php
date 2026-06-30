@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'sifen' => [
+        'api_key' => env('SIFEN_API_KEY'),
+        'api_url' => env('SIFEN_API_URL', 'http://209.126.1.2:85/api/farmayoproduccion/de/pdf'),
+    ],
+
 ];
+

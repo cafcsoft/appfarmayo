@@ -20,6 +20,20 @@
                     :current="request()->routeIs('admin.reporte.facturas')" wire:navigate>
                     {{ __('Reporte Facturas') }}
                 </flux:navbar.item>
+
+                <flux:dropdown class="max-lg:hidden">
+                    <flux:navbar.item icon="chart-bar" class="cursor-pointer">
+                        {{ __('Business Intelligence') }}
+                    </flux:navbar.item>
+
+                    <flux:menu>
+                        <flux:menu.item icon="chart-bar" :href="route('bi.dashboard')" wire:navigate>{{ __('Dashboard BI') }}</flux:menu.item>
+                        <flux:menu.item icon="arrow-trending-up" :href="route('bi.ventas')" wire:navigate>{{ __('Análisis de Ventas') }}</flux:menu.item>
+                        <flux:menu.item icon="tag" :href="route('bi.productos')" wire:navigate>{{ __('Análisis de Productos') }}</flux:menu.item>
+                        <flux:menu.item icon="users" :href="route('bi.clientes')" wire:navigate>{{ __('Análisis de Clientes') }}</flux:menu.item>
+                        <flux:menu.item icon="sparkles" :href="route('bi.forecasting')" wire:navigate>{{ __('Forecasting') }}</flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
             @endcan
 
             @if (auth()->user()->is_customer)
@@ -80,6 +94,17 @@
                     </flux:sidebar.item>
                 @endif
             </flux:sidebar.group>
+
+            {{-- BI Module — solo administradores --}}
+            @can('access-admin-reports')
+            <flux:sidebar.group heading="Business Intelligence" class="grid">
+                <flux:sidebar.item icon="chart-bar" :href="route('bi.dashboard')" :current="request()->routeIs('bi.dashboard')" wire:navigate>Dashboard BI</flux:sidebar.item>
+                <flux:sidebar.item icon="arrow-trending-up" :href="route('bi.ventas')" :current="request()->routeIs('bi.ventas')" wire:navigate>Análisis de Ventas</flux:sidebar.item>
+                <flux:sidebar.item icon="tag" :href="route('bi.productos')" :current="request()->routeIs('bi.productos')" wire:navigate>Análisis de Productos</flux:sidebar.item>
+                <flux:sidebar.item icon="users" :href="route('bi.clientes')" :current="request()->routeIs('bi.clientes')" wire:navigate>Análisis de Clientes</flux:sidebar.item>
+                <flux:sidebar.item icon="sparkles" :href="route('bi.forecasting')" :current="request()->routeIs('bi.forecasting')" wire:navigate>Forecasting</flux:sidebar.item>
+            </flux:sidebar.group>
+            @endcan
         </flux:sidebar.nav>
 
         <flux:spacer />
@@ -98,6 +123,7 @@
 
     {{ $slot }}
 
+    @stack('scripts')
     @fluxScripts
 </body>
 

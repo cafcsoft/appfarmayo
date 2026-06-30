@@ -75,6 +75,9 @@ class MisFacturas extends Component
             ->where('ticket_cab.idcliente', $ruc)
             ->whereDate('ticket_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('ticket_cab.fecha', '<=', $this->fecha_fin)
+            ->where('ticket_cab.idcliente', '!=', '13350')
+            ->where('ticket_cab.idcliente', '!=', '3714389-1')
+            ->where('ticket_cab.idcliente', '!=', '80051943-4')
             ->groupBy('ticket_cab.n_compro', 'ticket_cab.n_ticket', 'ticket_cab.fecha', 'ticket_cab.idcliente', 'ticket_cab.nombclie', 'ticket_cab.formapago', 'ticket_cab.numcdc')
             ->select(
                 'ticket_cab.n_compro',
@@ -95,6 +98,9 @@ class MisFacturas extends Component
             ->where('farmacia.clientes.ruc', $ruc)
             ->whereDate('fact_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('fact_cab.fecha', '<=', $this->fecha_fin)
+            ->where('fact_cab.codi_clie', '!=', '13350')
+            ->where('fact_cab.codi_clie', '!=', '3714389-1')
+            ->where('fact_cab.codi_clie', '!=', '80051943-4')
             ->groupBy('fact_cab.n_compro', 'fact_cab.n_factura', 'fact_cab.fecha', 'farmacia.clientes.ruc', 'farmacia.clientes.nomb_clie', 'farmacia.clientes.apel_clie', 'fact_cab.numcdc')
             ->select(
                 'fact_cab.n_compro',
@@ -114,6 +120,9 @@ class MisFacturas extends Component
             ->where('notacred_cab.idcliente', $ruc)
             ->whereDate('notacred_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('notacred_cab.fecha', '<=', $this->fecha_fin)
+            ->where('notacred_cab.idcliente', '!=', '13350')
+            ->where('notacred_cab.idcliente', '!=', '3714389-1')
+            ->where('notacred_cab.idcliente', '!=', '80051943-4')
             ->groupBy('notacred_cab.n_compro', 'notacred_cab.n_nota', 'notacred_cab.fecha', 'notacred_cab.idcliente', 'notacred_cab.gran_total', 'notacred_cab.formapago', 'notacred_cab.numcdc')
             ->select(
                 'notacred_cab.n_compro',

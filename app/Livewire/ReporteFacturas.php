@@ -70,6 +70,9 @@ class ReporteFacturas extends Component
             ->leftJoin('farmacia.client', 'farmacia.client.IDCLIENTE', '=', 'ticket_cab.idcliente')
             ->whereDate('ticket_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('ticket_cab.fecha', '<=', $this->fecha_fin)
+            ->where('ticket_cab.idcliente', '!=', '13350')
+            ->where('ticket_cab.idcliente', '!=', '3714389-1')
+            ->where('ticket_cab.idcliente', '!=', '80051943-4')
             ->groupBy(
                 'ticket_cab.n_compro',
                 'ticket_cab.n_ticket',
@@ -101,6 +104,9 @@ class ReporteFacturas extends Component
             ->join('farmacia.clientes', 'farmacia.clientes.codi_clie', '=', 'fact_cab.codi_clie')
             ->whereDate('fact_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('fact_cab.fecha', '<=', $this->fecha_fin)
+            ->where('fact_cab.codi_clie', '!=', '13350')
+            ->where('fact_cab.codi_clie', '!=', '3714389-1')
+            ->where('fact_cab.codi_clie', '!=', '80051943-4')
             ->groupBy(
                 'fact_cab.n_compro',
                 'fact_cab.n_factura',
@@ -132,6 +138,9 @@ class ReporteFacturas extends Component
             ->leftJoin('farmacia.client', 'farmacia.client.IDCLIENTE', '=', 'notacred_cab.idcliente')
             ->whereDate('notacred_cab.fecha', '>=', $this->fecha_ini)
             ->whereDate('notacred_cab.fecha', '<=', $this->fecha_fin)
+            ->where('notacred_cab.idcliente', '!=', '13350')
+            ->where('notacred_cab.idcliente', '!=', '3714389-1')
+            ->where('notacred_cab.idcliente', '!=', '80051943-4')
             ->groupBy(
                 'notacred_cab.n_compro',
                 'notacred_cab.n_nota',

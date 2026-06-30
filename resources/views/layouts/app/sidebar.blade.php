@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     @include('partials.head')
 </head>
 
-<body class="min-h-screen hero-gradient text-gray-800">
+<body class="min-h-screen bg-white dark:bg-zinc-800 text-gray-800 dark:text-gray-200">
     <flux:sidebar sticky collapsible="mobile"
-        class="border-e border-teal-100 bg-white/50 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900">
+        class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.header>
             <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
             <flux:sidebar.collapse class="lg:hidden" />
@@ -15,9 +15,6 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.group :heading="__('Platform')" class="grid">
-                {{-- <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </flux:sidebar.item> --}}
                 @can('access-admin-reports')
                     <flux:sidebar.item icon="document-text" :href="route('admin.reporte.facturas')"
                         :current="request()->routeIs('admin.reporte.facturas')" wire:navigate>
@@ -32,6 +29,32 @@
                     </flux:sidebar.item>
                 @endif
             </flux:sidebar.group>
+
+            {{-- BI Module — solo administradores --}}
+            @can('access-admin-reports')
+            <flux:sidebar.group heading="Business Intelligence" class="grid">
+                <flux:sidebar.item icon="chart-bar" :href="route('bi.dashboard')"
+                    :current="request()->routeIs('bi.dashboard')" wire:navigate>
+                    Dashboard BI
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="arrow-trending-up" :href="route('bi.ventas')"
+                    :current="request()->routeIs('bi.ventas')" wire:navigate>
+                    Análisis de Ventas
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="tag" :href="route('bi.productos')"
+                    :current="request()->routeIs('bi.productos')" wire:navigate>
+                    Análisis de Productos
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="users" :href="route('bi.clientes')"
+                    :current="request()->routeIs('bi.clientes')" wire:navigate>
+                    Análisis de Clientes
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="sparkles" :href="route('bi.forecasting')"
+                    :current="request()->routeIs('bi.forecasting')" wire:navigate>
+                    Forecasting
+                </flux:sidebar.item>
+            </flux:sidebar.group>
+            @endcan
         </flux:sidebar.nav>
 
         <flux:spacer />
@@ -95,6 +118,7 @@
 
     {{ $slot }}
 
+    @stack('scripts')
     @fluxScripts
 </body>
 

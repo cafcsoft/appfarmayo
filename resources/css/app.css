@@ -246,3 +246,173 @@ select:focus[data-flux-control] {
 .invoice-control-input:focus {
     box-shadow: 0 0 0 2px #6366f1;
 }
+
+/* ==========================================================================
+   BUSINESS INTELLIGENCE MODULE — Design System
+   ========================================================================== */
+
+/* --- Layout base del módulo BI --- */
+.bi-dashboard {
+    min-height: 100%;
+}
+
+/* --- Cards --- */
+.bi-card {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900;
+    overflow: hidden;
+}
+
+.bi-card-header {
+    @apply flex items-center justify-between border-b border-gray-100 px-5 py-4 dark:border-zinc-800;
+}
+
+.bi-card-title {
+    @apply text-base font-semibold text-gray-800 dark:text-gray-100;
+}
+
+.bi-card-body {
+    @apply p-4;
+}
+
+/* --- KPI Cards --- */
+.bi-kpi-card {
+    @apply flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm transition-shadow hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900;
+}
+
+.bi-kpi-icon {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl;
+}
+
+.bi-kpi-body {
+    @apply min-w-0 flex-1;
+}
+
+.bi-kpi-label {
+    @apply truncate text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400;
+}
+
+.bi-kpi-value {
+    @apply truncate text-xl font-bold text-gray-900 dark:text-white;
+}
+
+.bi-kpi-sub {
+    @apply truncate text-xs;
+}
+
+/* --- Tabs --- */
+.bi-tab-btn {
+    @apply flex-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-white hover:text-gray-900 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100;
+    white-space: nowrap;
+}
+
+.bi-tab-active {
+    @apply bg-white font-semibold text-indigo-600 shadow-sm dark:bg-zinc-700 dark:text-indigo-400;
+}
+
+/* --- Buttons --- */
+.bi-btn-outline {
+    @apply rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:border-indigo-400 hover:text-indigo-600 dark:border-zinc-600 dark:bg-zinc-800 dark:text-gray-300 dark:hover:border-indigo-500 dark:hover:text-indigo-400;
+}
+
+.bi-btn-sm {
+    @apply rounded-lg px-3 py-1.5 text-sm font-medium transition-all;
+}
+
+.bi-btn-active {
+    @apply bg-indigo-600 text-white shadow-sm;
+}
+
+/* --- Inputs / Selects --- */
+.bi-input {
+    @apply rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20 dark:border-zinc-600 dark:bg-zinc-800 dark:text-gray-200 dark:focus:border-indigo-500;
+}
+
+.bi-select {
+    @apply rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-indigo-400 dark:border-zinc-600 dark:bg-zinc-800 dark:text-gray-200;
+}
+
+.bi-label {
+    @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+}
+
+/* --- Tables --- */
+.bi-table {
+    @apply w-full text-sm;
+}
+
+.bi-table thead tr {
+    @apply border-b border-gray-100 dark:border-zinc-800;
+}
+
+.bi-table th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400;
+}
+
+.bi-table tbody tr {
+    @apply border-b border-gray-50 transition-colors last:border-0 hover:bg-gray-50 dark:border-zinc-800 dark:hover:bg-zinc-800/60;
+}
+
+.bi-table td {
+    @apply px-4 py-3 text-gray-700 dark:text-gray-300;
+}
+
+.bi-empty {
+    @apply py-8 text-center text-sm text-gray-400 dark:text-gray-500;
+}
+
+/* --- Badges --- */
+.bi-badge {
+    @apply inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold;
+}
+
+.bi-badge-success {
+    @apply bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:ring-emerald-700;
+}
+
+.bi-badge-warning {
+    @apply bg-amber-50 text-amber-700 ring-1 ring-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:ring-amber-700;
+}
+
+.bi-badge-danger {
+    @apply bg-rose-50 text-rose-700 ring-1 ring-rose-200 dark:bg-rose-900/30 dark:text-rose-400 dark:ring-rose-700;
+}
+
+.bi-badge-info {
+    @apply bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-400 dark:ring-indigo-700;
+}
+
+/* --- Badges ABC --- */
+.bi-abc-badge {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold;
+}
+.bi-abc-a { @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400; }
+.bi-abc-b { @apply bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400; }
+.bi-abc-c { @apply bg-gray-100 text-gray-600 dark:bg-zinc-700 dark:text-gray-400; }
+
+/* --- Badges de Segmento de Clientes --- */
+.bi-segmento-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold;
+}
+
+.bi-seg-nuevo        { @apply bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400; }
+.bi-seg-activo       { @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400; }
+.bi-seg-recurrente   { @apply bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400; }
+.bi-seg-fiel         { @apply bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400; }
+.bi-seg-en-riesgo    { @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400; }
+.bi-seg-perdido      { @apply bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400; }
+.bi-seg-ocasional    { @apply bg-gray-100 text-gray-600 dark:bg-zinc-700 dark:text-gray-400; }
+
+/* --- Alertas del sistema --- */
+.bi-alert {
+    @apply flex items-start gap-3 rounded-xl border px-4 py-3 text-sm;
+}
+
+.bi-alert-danger  { @apply border-rose-200 bg-rose-50 text-rose-800 dark:border-rose-700/50 dark:bg-rose-900/20 dark:text-rose-300; }
+.bi-alert-warning { @apply border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-700/50 dark:bg-amber-900/20 dark:text-amber-300; }
+.bi-alert-info    { @apply border-indigo-200 bg-indigo-50 text-indigo-800 dark:border-indigo-700/50 dark:bg-indigo-900/20 dark:text-indigo-300; }
+.bi-alert-success { @apply border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-700/50 dark:bg-emerald-900/20 dark:text-emerald-300; }
+
+/* --- Links --- */
+.bi-link-sm {
+    @apply text-xs font-medium text-indigo-600 transition hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300;
+}

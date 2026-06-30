@@ -17,6 +17,9 @@ class FacturaPdfController extends Controller
             $factura = DB::table('ticket_cab')
                 ->leftJoin('farmacia.client', 'farmacia.client.IDCLIENTE', '=', 'ticket_cab.idcliente')
                 ->where('ticket_cab.n_compro', $n_compro)
+                ->where('ticket_cab.idcliente', '!=', '13350')
+                ->where('ticket_cab.idcliente', '!=', '3714389-1')
+                ->where('ticket_cab.idcliente', '!=', '80051943-4')
                 ->select(
                     'ticket_cab.n_compro',
                     'ticket_cab.n_ticket as n_factura',
@@ -39,6 +42,9 @@ class FacturaPdfController extends Controller
             $factura = DB::table('fact_cab')
                 ->join('farmacia.clientes', 'farmacia.clientes.codi_clie', '=', 'fact_cab.codi_clie')
                 ->where('fact_cab.n_compro', $n_compro)
+                ->where('fact_cab.codi_clie', '!=', '13350')
+                ->where('fact_cab.codi_clie', '!=', '3714389-1')
+                ->where('fact_cab.codi_clie', '!=', '80051943-4')
                 ->select(
                     'fact_cab.n_compro',
                     'fact_cab.n_factura',
@@ -60,6 +66,9 @@ class FacturaPdfController extends Controller
             $factura = DB::table('notacred_cab')
                 ->leftJoin('farmacia.client', 'farmacia.client.IDCLIENTE', '=', 'notacred_cab.idcliente')
                 ->where('notacred_cab.n_compro', $n_compro)
+                ->where('notacred_cab.idcliente', '!=', '13350')
+                ->where('notacred_cab.idcliente', '!=', '3714389-1')
+                ->where('notacred_cab.idcliente', '!=', '80051943-4')
                 ->select(
                     'notacred_cab.n_compro',
                     'notacred_cab.n_nota AS n_factura',
@@ -95,19 +104,20 @@ class FacturaPdfController extends Controller
             return response()->json(['error' => 'CDC no proporcionado'], 400);
         }
 
-        $apiKey = 'api_key_DDEAA852-8814-4E99-B1ED-655B76CFB321';
+        $apiKey = config('services.sifen.api_key');
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$apiKey,
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-        ])->post('http://209.126.1.2:85/api/farmayoproduccion/de/pdf', [
+        ])->post(config('services.sifen.api_url'), [
             'cdcList' => [
                 ['cdc' => $cdc],
             ],
             'type' => 'base64',
             'format' => 'factura',
         ]);
+
 
         if ($response->successful()) {
             $data = $response->json();
