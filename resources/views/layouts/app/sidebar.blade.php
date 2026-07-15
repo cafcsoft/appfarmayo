@@ -6,11 +6,11 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800 text-gray-800 dark:text-gray-200">
-    <flux:sidebar sticky collapsible="mobile"
+    <flux:sidebar sticky collapsible
         class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.header>
             <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
-            <flux:sidebar.collapse class="lg:hidden" />
+            <flux:sidebar.collapse />
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
@@ -19,6 +19,13 @@
                     <flux:sidebar.item icon="document-text" :href="route('admin.reporte.facturas')"
                         :current="request()->routeIs('admin.reporte.facturas')" wire:navigate>
                         {{ __('Reporte Facturas') }}
+                    </flux:sidebar.item>
+                @endcan
+
+                @can('manage-users')
+                    <flux:sidebar.item icon="users" :href="route('admin.usuarios')"
+                        :current="request()->routeIs('admin.usuarios')" wire:navigate>
+                        {{ __('Usuarios') }}
                     </flux:sidebar.item>
                 @endcan
 
@@ -52,6 +59,24 @@
                 <flux:sidebar.item icon="sparkles" :href="route('bi.forecasting')"
                     :current="request()->routeIs('bi.forecasting')" wire:navigate>
                     Forecasting
+                </flux:sidebar.item>
+            </flux:sidebar.group>
+            @endcan
+
+            {{-- Contabilidad Module — solo contadores --}}
+            @can('access-accounting')
+            <flux:sidebar.group heading="Contabilidad" class="grid">
+                <flux:sidebar.item icon="layout-grid" :href="route('contabilidad.dashboard')"
+                    :current="request()->routeIs('contabilidad.dashboard')" wire:navigate>
+                    Dashboard Contabilidad
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="document-text" :href="route('contabilidad.reporte.facturas')"
+                    :current="request()->routeIs('contabilidad.reporte.facturas')" wire:navigate>
+                    Reporte de Ventas
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="calculator" :href="route('contabilidad.libro-ventas-iva')"
+                    :current="request()->routeIs('contabilidad.libro-ventas-iva')" wire:navigate>
+                    Libro de ventas IVA
                 </flux:sidebar.item>
             </flux:sidebar.group>
             @endcan

@@ -1,7 +1,7 @@
 <x-layouts::auth :title="__('Log in')">
     <div class="flex flex-col gap-6">
         <x-auth-header :title="__('Log in to your account')"
-            :description="__('Enter your Cedula or RUC and password below to log in')" />
+            :description="__('Enter your username, Cedula or RUC and password below to log in')" />
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
@@ -10,8 +10,8 @@
             @csrf
 
             <!-- Username -->
-            <flux:input name="username" :label="__('Cédula o RUC')" :value="old('username')" type="text" required
-                autofocus autocomplete="username" placeholder="Cédula o RUC" />
+            <flux:input name="username" :label="__('Username, Cedula or RUC')" :value="old('username')" type="text" required
+                autofocus autocomplete="username" :placeholder="__('Username, Cedula or RUC')" />
 
             <!-- Password -->
             <div class="relative">

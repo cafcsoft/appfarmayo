@@ -18,12 +18,12 @@ class AuthenticationTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function test_users_can_authenticate_using_username(): void
     {
         $user = User::factory()->create();
 
         $response = $this->post(route('login.store'), [
-            'email' => $user->email,
+            'username' => $user->username,
             'password' => 'password',
         ]);
 
@@ -31,7 +31,23 @@ class AuthenticationTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('dashboard', absolute: false));
 
-        $this->assertAuthenticated();
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_users_can_authenticate_using_ruc_cedula(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post(route('login.store'), [
+            'username' => $user->ruc_cedula,
+            'password' => 'password',
+        ]);
+
+        $response
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('dashboard', absolute: false));
+
+        $this->assertAuthenticatedAs($user);
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
@@ -39,11 +55,11 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->post(route('login.store'), [
-            'email' => $user->email,
+            'username' => $user->username,
             'password' => 'wrong-password',
         ]);
 
-        $response->assertSessionHasErrorsIn('email');
+        $response->assertSessionHasErrorsIn('username');
 
         $this->assertGuest();
     }
@@ -60,7 +76,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->withTwoFactor()->create();
 
         $response = $this->post(route('login.store'), [
-            'email' => $user->email,
+            'username' => $user->username,
             'password' => 'password',
         ]);
 

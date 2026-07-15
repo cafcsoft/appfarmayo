@@ -19,6 +19,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return redirect()->route('mis.facturas');
         }
 
+        if (auth()->user()->roles()->where('name', 'contador')->exists()) {
+            return redirect()->route('contabilidad.dashboard');
+        }
+
         return redirect()->route('bi.dashboard');
     })->name('dashboard');
 
@@ -39,7 +43,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/clientes',     AnalisisClientes::class)->name('clientes');
         Route::get('/forecasting',  Forecasting::class)->name('forecasting');
     });
+
+    // Módulo Contabilidad — solo contadores (gate: access-accounting)
+    Route::middleware(['can:access-accounting'])->prefix('contabilidad')->name('contabilidad.')->group(function () {
+        Route::get('/dashboard', \App\Livewire\Contabilidad\Dashboard::class)->name('dashboard');
+        Route::get('/reporte-facturas', \App\Livewire\ReporteFacturas::class)->name('reporte.facturas');
+        Route::get('/libro-ventas-iva', \App\Livewire\Contabilidad\LibroVentasIva::class)->name('libro-ventas-iva');
+        Route::get('/libro-ventas-iva/print', \App\Http\Controllers\Contabilidad\LibroIvaPrintController::class)->name('libro-iva.print');
+    });
 });
+
+Route::get('forgot-password', \App\Livewire\Auth\ForgotPassword::class)
+    ->name('password.request')
+    ->middleware('guest');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/admin.php';

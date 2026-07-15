@@ -92,7 +92,51 @@ class FacturaPdfController extends Controller
             abort(404, 'Factura no encontrada');
         }
 
-        return view('pdf.factura', compact('factura', 'detalle'));
+        $anulado = false;
+        if (!empty($factura->num_cdc)) {
+            $cached = DB::table('cdc_cache')->where('cdc', $factura->num_cdc)->first();
+            if ($cached && $cached->success) {
+                $payload = json_decode($cached->payload, true);
+                $situacion = (int) ($payload['result']['situacion'] ?? ($payload['situacion'] ?? 0));
+                if ($situacion === 99) {
+                    $anulado = true;
+                }
+            } else {
+                try {
+                    $apiBase = config('services.sifen.cdc_url');
+                    $apiKey  = config('services.sifen.api_key');
+                    if (!empty($apiBase) && !empty($apiKey)) {
+                        $res = Http::timeout(5)
+                            ->withHeaders([
+                                'Authorization' => 'Bearer ' . $apiKey,
+                                'Accept'        => 'application/json',
+                            ])
+                            ->get($apiBase . $factura->num_cdc);
+                        
+                        if ($res->successful()) {
+                            $payload = $res->json();
+                            $success = (bool) ($payload['success'] ?? false);
+                            
+                            DB::table('cdc_cache')->insertOrIgnore([
+                                'cdc'        => $factura->num_cdc,
+                                'payload'    => json_encode($payload),
+                                'success'    => $success,
+                                'created_at' => now(),
+                            ]);
+                            
+                            $situacion = (int) ($payload['result']['situacion'] ?? ($payload['situacion'] ?? 0));
+                            if ($situacion === 99) {
+                                $anulado = true;
+                            }
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    report($e);
+                }
+            }
+        }
+
+        return view('pdf.factura', compact('factura', 'detalle', 'anulado'));
     }
 
     public function downloadKude(Request $request)

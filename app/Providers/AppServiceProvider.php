@@ -34,7 +34,23 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
 
         Gate::define('access-admin-reports', function ($user) {
-            return ! $user->is_customer;
+            if ($user->is_customer) {
+                return false;
+            }
+
+            if ($user->roles()->where('name', 'contador')->exists()) {
+                return false;
+            }
+
+            return true;
+        });
+
+        Gate::define('access-accounting', function ($user) {
+            return $user->roles()->whereIn('name', ['contador', 'Administrador'])->exists();
+        });
+
+        Gate::define('manage-users', function ($user) {
+            return $user->roles()->whereIn('name', ['Administrador', 'Developer'])->exists();
         });
     }
 

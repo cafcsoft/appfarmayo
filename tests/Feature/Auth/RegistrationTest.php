@@ -26,8 +26,18 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
+        if (\Illuminate\Support\Facades\DB::connection()->getDriverName() === 'sqlite') {
+            \Illuminate\Support\Facades\DB::statement('CREATE TABLE IF NOT EXISTS "farmacia.client" (IDCLIENTE VARCHAR(255))');
+        }
+
+        \Illuminate\Support\Facades\DB::table('farmacia.client')->insert([
+            'IDCLIENTE' => '1234567'
+        ]);
+
         $response = $this->post(route('register.store'), [
             'name' => 'John Doe',
+            'username' => 'johndoe',
+            'ruc_cedula' => '1234567',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',

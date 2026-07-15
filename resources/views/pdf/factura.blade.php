@@ -215,6 +215,24 @@
             font-size: 11px;
         }
 
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-35deg);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(239, 68, 68, 0.15); /* Rojo con baja opacidad */
+            border: 12px double rgba(239, 68, 68, 0.15);
+            padding: 15px 40px;
+            border-radius: 16px;
+            text-transform: uppercase;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            white-space: nowrap;
+        }
+
         @media print {
             body {
                 padding: 10px;
@@ -232,6 +250,9 @@
 </head>
 
 <body>
+    @if ($anulado)
+        <div class="watermark">ANULADO</div>
+    @endif
     {{-- Print button (hidden on print) --}}
     <div class="no-print" style="text-align:right; margin-bottom:16px;">
         <button onclick="window.print()"

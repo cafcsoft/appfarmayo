@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('visitas')) {
-            Schema::create('visitas', function (Blueprint $table) {
-                $table->id();
-                $table->string('pagina')->unique();
-                $table->unsignedBigInteger('contador')->default(0);
-                $table->timestamps();
+        if (!Schema::hasColumn('users', 'recovery_pin')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('recovery_pin')->default('123456')->after('username');
             });
         }
     }
@@ -26,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visitas');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('recovery_pin');
+        });
     }
 };
