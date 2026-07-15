@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,10 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasColumn('users', 'recovery_pin')) {
-            Schema::table('users', function (Blueprint $table) {
-                $table->string('recovery_pin')->default('123456')->after('username');
-            });
+        $columns = DB::select("SHOW COLUMNS FROM users LIKE 'recovery_pin'");
+        if (empty($columns)) {
+            DB::statement("ALTER TABLE users ADD COLUMN recovery_pin VARCHAR(255) DEFAULT '123456' AFTER username");
         }
     }
 
@@ -23,8 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('recovery_pin');
-        });
+        $columns = DB::select("SHOW COLUMNS FROM users LIKE 'recovery_pin'");
+        if (!empty($columns)) {
+            DB::statement("ALTER TABLE users DROP COLUMN recovery_pin");
+        }
     }
 };
