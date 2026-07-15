@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('cdc_cache', function (Blueprint $table) {
             $table->string('cdc', 44)->primary(); // CDC tiene siempre 44 caracteres
-            $table->json('payload');               // Respuesta completa de la API
+            $table->longText('payload');          // Respuesta completa de la API (almacenada como texto largo compatible)
             $table->boolean('success')->default(true); // Si la respuesta fue exitosa
             $table->timestamp('created_at')->useCurrent();
         });
